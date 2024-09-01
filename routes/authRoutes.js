@@ -1,13 +1,15 @@
 const express = require('express');
 const { registerController, loginController } = require('../controllers/authController');
+const { validateRegister, validateLogin } = require('../validators/authValidator');
+
 const router = express.Router();
 
 /**
  * @swagger
  * /auth/register:
  *   post:
- *     summary: Register a new user
- *     description: Create a new user account in the OutFitted application.
+ *     summary: Create a new user
+ *     description: Add a new user to the system.
  *     requestBody:
  *       required: true
  *       content:
@@ -15,18 +17,25 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               firstName:
  *                 type: string
- *                 example: johndoe
+ *                 example: John
+ *               lastName:
+ *                 type: string
+ *                 example: Doe
  *               email:
  *                 type: string
  *                 example: johndoe@example.com
  *               password:
  *                 type: string
  *                 example: Password123
+ *               role:
+ *                 type: string
+ *                 enum: [customer, admin]
+ *                 example: customer
  *     responses:
  *       201:
- *         description: User successfully registered
+ *         description: User created
  *         content:
  *           application/json:
  *             schema:
@@ -35,18 +44,25 @@ const router = express.Router();
  *                 id:
  *                   type: integer
  *                   example: 1
- *                 username:
+ *                 firstName:
  *                   type: string
- *                   example: johndoe
+ *                   example: John
+ *                 lastName:
+ *                   type: string
+ *                   example: Doe
  *                 email:
  *                   type: string
  *                   example: johndoe@example.com
+ *                 role:
+ *                   type: string
+ *                   enum: [customer, admin]
+ *                   example: customer
  *       400:
  *         description: Bad request, validation errors
  *       500:
  *         description: Server error
  */
-router.post('/register', registerController);
+router.post('/register', validateRegister, registerController);
 
 /**
  * @swagger
@@ -85,7 +101,7 @@ router.post('/register', registerController);
  *       500:
  *         description: Server error
  */
-router.post('/login', loginController);
+router.post('/login', validateLogin, loginController);
 
 module.exports = router;
 

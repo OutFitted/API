@@ -1,7 +1,7 @@
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ["http://localhost", "http://another-example.com"], // Add your front-end domains
+  origin: ["http://localhost:3000", "http://another-example.com"], // Add your front-end domains
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };

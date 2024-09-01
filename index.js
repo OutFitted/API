@@ -7,7 +7,7 @@ require("dotenv").config();
 
 // Import middleware
 const corsMiddleware = require("./middleware/cors");
-const loggerMiddleware = require("./middleware/logger");
+const { httpLogger } = require("./middleware/logger");
 const errorHandlerMiddleware = require("./middleware/errorHandler");
 const rateLimiterMiddleware = require("./middleware/rateLimiter");
 
@@ -25,7 +25,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsMiddleware);
-app.use(loggerMiddleware);
+app.use(httpLogger);
 app.use(rateLimiterMiddleware);
 
 // Routes
