@@ -1,5 +1,5 @@
 const express = require('express');
-const { authenticateJWT } = require('../middleware/authenticateJWT');
+const authenticateJWT = require('../middleware/authenticateJWT');
 const { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } = require('../controllers/productController');
 const router = express.Router();
 

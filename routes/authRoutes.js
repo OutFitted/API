@@ -10,6 +10,7 @@ const router = express.Router();
  *   post:
  *     summary: Create a new user
  *     description: Add a new user to the system.
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:
@@ -70,6 +71,7 @@ router.post('/register', validateRegister, registerController);
  *   post:
  *     summary: Login a user
  *     description: Authenticate a user and return a token for authorized access.
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:

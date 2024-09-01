@@ -6,15 +6,16 @@ const { logger } = require('../middleware/logger');
 const register = async (userData) => {
     const hashedPassword = await hashPassword(userData.password);
     const user = await User.create({ ...userData, password: hashedPassword });
+    const { password, ...userWithoutPassword } = user;
     logger.info("User registered successfully");
-    return user;
+    return userWithoutPassword;
 };
 
 const login = async (email, password) => {
     logger.info(`Attempting login for user with email: ${email}`);
     const user = await User.findOne({ where: { email } });
     if (user && await comparePassword(password, user.password)) {
-        const { password, ...userWithoutPassword } = user.toJSON();
+        const { password, ...userWithoutPassword } = user;
         const token = generateToken(userWithoutPassword);
         logger.info("Login successful");
         return { user: userWithoutPassword, token };

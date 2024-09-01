@@ -12,7 +12,7 @@ const errorHandlerMiddleware = require("./middleware/errorHandler");
 const rateLimiterMiddleware = require("./middleware/rateLimiter");
 
 const authRoutes = require("./routes/authRoutes");
-// const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes");
 // const productRoutes = require("./routes/productRoutes");
 // const orderRoutes = require("./routes/orderRoutes");
 
@@ -30,7 +30,7 @@ app.use(rateLimiterMiddleware);
 
 // Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
 // app.use("/api/products", productRoutes);
 // app.use("/api/orders", orderRoutes);
 
