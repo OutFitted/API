@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const swaggerSetup = require('./swagger');
 
 require("dotenv").config();
 
@@ -32,6 +33,9 @@ app.use("/api/auth", authRoutes);
 // app.use("/api/users", userRoutes);
 // app.use("/api/products", productRoutes);
 // app.use("/api/orders", orderRoutes);
+
+// Initialize Swagger
+swaggerSetup(app);
 
 // Health endpoint
 app.get("/api/health", (req, res) => {
