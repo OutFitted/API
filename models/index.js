@@ -13,6 +13,9 @@ const Token = require("./Token");
 const User = require("./User");
 const Wishlist = require("./Wishlist");
 
+// Import associations to set up relationships
+require('./Associations');
+
 // Sync all models
 sequelize.sync({ alter: true });
 

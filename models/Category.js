@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db.config");
-const Product = require("./Product");
 
 const Category = sequelize.define("Category", {
   id: {
