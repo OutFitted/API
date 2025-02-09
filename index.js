@@ -1,17 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const swaggerSetup = require('./swagger');
 
 require("dotenv").config();
 
 // Import middleware
 const corsMiddleware = require("./middleware/cors");
-const loggerMiddleware = require("./middleware/logger");
+const { httpLogger } = require("./middleware/logger");
 const errorHandlerMiddleware = require("./middleware/errorHandler");
 const rateLimiterMiddleware = require("./middleware/rateLimiter");
 
-// const authRoutes = require("./routes/authRoutes");
-// const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 // const productRoutes = require("./routes/productRoutes");
 // const orderRoutes = require("./routes/orderRoutes");
 
@@ -24,14 +25,17 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsMiddleware);
-app.use(loggerMiddleware);
+app.use(httpLogger);
 app.use(rateLimiterMiddleware);
 
 // Routes
-// app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 // app.use("/api/products", productRoutes);
 // app.use("/api/orders", orderRoutes);
+
+// Initialize Swagger
+swaggerSetup(app);
 
 // Health endpoint
 app.get("/api/health", (req, res) => {

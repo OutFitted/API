@@ -1,5 +1,5 @@
 const express = require('express');
-const { authenticateJWT } = require('../middleware/authenticateJWT');
+const authenticateJWT = require('../middleware/authenticateJWT');
 const { createOrder, getUserOrders, updateOrderStatus } = require('../controllers/orderController');
 const router = express.Router();
 
